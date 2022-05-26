@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 08:01:42 by owalsh            #+#    #+#             */
-/*   Updated: 2022/05/17 16:56:22 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/05/26 15:39:53 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*get_next_line(int fd)
 		return (NULL);
 	ret = 1;
 	line = NULL;
-	line = ft_strjoin(line, buf);
+	line = ft_sjoin(line, buf);
 	while (ret && !has_nl(line))
 	{
 		ret = read(fd, buf, BUFFER_SIZE);
@@ -34,7 +34,7 @@ char	*get_next_line(int fd)
 		if (ret)
 		{
 			buf[ret] = '\0';
-			line = ft_strjoin(line, buf);
+			line = ft_sjoin(line, buf);
 		}
 	}
 	clean_buf(buf);

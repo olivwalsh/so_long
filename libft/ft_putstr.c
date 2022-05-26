@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/24 12:56:06 by owalsh            #+#    #+#             */
-/*   Updated: 2022/05/26 15:41:31 by owalsh           ###   ########.fr       */
+/*   Created: 2022/05/26 15:35:48 by owalsh            #+#    #+#             */
+/*   Updated: 2022/05/26 15:36:37 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
-
-void	error()
+void	ft_putchar(char c)
 {
-	ft_putstr("Error\n");
+	write(1, &c, 1);
 }
 
-int	main(int argc, char **argv)
+void	ft_putstr(char *str)
 {
-	if (argc == 2)
+	while (str && *str)
 	{
-		(void)argv;
+		ft_putchar(*str);
+		str++;
 	}
-	else
-		error();
 }

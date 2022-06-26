@@ -1,4 +1,5 @@
 imgs/
 objs/
 so_long
-libft/objs
+inc/libft/objs/
+.gitignore

@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 20:53:41 by owalsh            #+#    #+#             */
-/*   Updated: 2022/06/26 23:12:32 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/06/26 23:20:43 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,10 @@ void	init_map(void *mlx, void *mlx_win, char **map)
 	(void)mlx;
 	(void)mlx_win;
 	y = 0;
+	printf("1\n");
 	while (map[y])
 	{
+		printf("1\n");
 		x = 0;
 		while (map[x])
 		{

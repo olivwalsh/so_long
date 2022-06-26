@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 13:03:21 by owalsh            #+#    #+#             */
-/*   Updated: 2022/06/26 23:11:37 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/06/26 23:28:32 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int		is_valid(char c)
 	int		i;
 
 	i = 0;
-	valids = "10pce";
+	valids = "10PCE";
 	while (valids[i])
 	{
 		if (c == valids[i])
@@ -47,6 +47,7 @@ int		fill_tab(char *map, char **tab, int y)
 	int		fd;
 	int		j;
 
+	printf("in fill tab\n");
 	fd = open(map, O_RDONLY);
 	line = get_next_line(fd);
 	tab = malloc(sizeof(char *) * (y + 1));
@@ -84,9 +85,11 @@ int		parse_map(char *map, char **tab)
 	y = 0;
 	while (line)
 	{
+		printf("line n.%d\n", y);
 		x = 0;
-		while (line[x] != '\n')
+		while (line[x] && line[x] != '\n')
 		{
+			// printf("line[%d][%d] = %c ", y, x, line[x]);
 			if (!is_valid(line[x]))
 			{
 				free(line);
@@ -102,5 +105,6 @@ int		parse_map(char *map, char **tab)
 		free(line);
 		line = get_next_line(fd);
 	}
+	
 	return (fill_tab(map, tab, x));
 }

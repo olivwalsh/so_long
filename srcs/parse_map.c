@@ -6,7 +6,101 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 13:03:21 by owalsh            #+#    #+#             */
-/*   Updated: 2022/05/24 13:03:22 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/06/26 23:11:37 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "so_long.h"
+
+int		is_valid(char c)
+{
+	char	*valids;
+	int		i;
+
+	i = 0;
+	valids = "10pce";
+	while (valids[i])
+	{
+		if (c == valids[i])
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+void	fill_line(char *line, char **tab, int j)
+{
+	int	i;
+
+	i = 0;
+	while (i < j)
+	{
+		*tab[i] = line[i];
+		i++;
+	}
+	*tab = '\0';
+}
+
+int		fill_tab(char *map, char **tab, int y)
+{
+	char	*line;
+	int		fd;
+	int		j;
+
+	fd = open(map, O_RDONLY);
+	line = get_next_line(fd);
+	tab = malloc(sizeof(char *) * (y + 1));
+	if (!tab)
+		return (0);
+	while (line)
+	{
+		j = 0;
+		while (line[j] != '\n')
+			j++;
+		tab[y] = malloc(sizeof(char) * (j + 1));
+		if (!tab[y])
+		{
+			free(line);
+			return (0);
+		}
+		fill_line(line, &tab[y], j);
+		line = get_next_line(fd);
+		y++;
+	}
+	tab[y] = NULL;
+	return (1);
+}
+
+int		parse_map(char *map, char **tab)
+{
+	char	*line;
+	int		fd;
+	int		x;
+	int		y;
+	int		prev_x;
+	
+	fd = open(map, O_RDONLY);
+	line = get_next_line(fd);
+	y = 0;
+	while (line)
+	{
+		x = 0;
+		while (line[x] != '\n')
+		{
+			if (!is_valid(line[x]))
+			{
+				free(line);
+				return (0);
+			}
+			x++;
+		}
+		if (y == 0)
+			prev_x = x;
+		if (y != 0 && prev_x != x)
+			return (0);
+		y++;
+		free(line);
+		line = get_next_line(fd);
+	}
+	return (fill_tab(map, tab, x));
+}

@@ -6,11 +6,11 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 08:01:42 by owalsh            #+#    #+#             */
-/*   Updated: 2022/05/26 15:39:53 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/06/26 21:27:50 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "so_long.h"
 
 char	*get_next_line(int fd)
 {
@@ -22,7 +22,7 @@ char	*get_next_line(int fd)
 		return (NULL);
 	ret = 1;
 	line = NULL;
-	line = ft_sjoin(line, buf);
+	line = ft_strjoin(line, buf);
 	while (ret && !has_nl(line))
 	{
 		ret = read(fd, buf, BUFFER_SIZE);
@@ -34,7 +34,7 @@ char	*get_next_line(int fd)
 		if (ret)
 		{
 			buf[ret] = '\0';
-			line = ft_sjoin(line, buf);
+			line = ft_strjoin(line, buf);
 		}
 	}
 	clean_buf(buf);

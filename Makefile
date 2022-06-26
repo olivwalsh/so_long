@@ -8,8 +8,11 @@ CC = gcc
 
 CFLAGS = -Wall -Wextra -Werror 
 
-SRC =	srcs/so_long.c \
-		srcs/parse_map.c
+SRC =	srcs/main.c \
+		srcs/parse_map.c \
+		srcs/init_map.c \
+		srcs/get_next_line.c \
+		srcs/get_next_line_utils.c
 
 OBJDIR = objs
 
@@ -17,27 +20,27 @@ INCDIR = inc
 
 OBJ = $(addprefix ${OBJDIR}/,${SRC:.c=.o})
 
-INC = -I./${INCDIR} -I./${INCDIR}/minilibx-linux
+INC = -I./${INCDIR} -I./minilibx-linux
 
 MLX = -L./${INCDIR}/minilibx-linux -lmlx
 
 MLXLIBX = -lXext -lX11 -lm -lz 
 
-LIBFT = -L./${INCDIR}/libft -lft
+# LIBFT = -L./${INCDIR}/libft -lft
 
 all: $(NAME) 
 
-$(NAME): $(OBJ) libft minilibx
-	$(CC) $(CFLAGS) $(INC) -O3 $(OBJ) -o $@ $(MLX) $(LIBFT) $(MLXLIBX)
+$(NAME): $(OBJ) minilibx
+	$(CC) $(CFLAGS) $(INC) $(OBJ) $(MLX) $(MLXLIBX) -o $@
 
 ${OBJDIR}/%.o : %.c
 	mkdir -p ${@D}
-	$(CC) $(CFLAGS) $(INC) -O3 -c $< -o $@
+	$(CC) $(CFLAGS) $(INC) -c $< -o $@
 
-libft:
-	@echo -n "Compiling libft"
-	@make -s -C${INCDIR}/libft
-	@echo ${GREEN}"\t\tOK"${RESET}
+# libft:
+# 	@echo -n "Compiling libft"
+# 	@make -s -C${INCDIR}/libft
+# 	@echo ${GREEN}"\t\tOK"${RESET}
 
 minilibx:
 	@echo -n "Compiling minilibx"
@@ -46,13 +49,13 @@ minilibx:
 
 clean :
 	rm -rf $(OBJDIR)
-	@make clean -s -C${INCDIR}/libft
+# @make clean -s -C${INCDIR}/libft
 	@make clean -s -C${INCDIR}/minilibx-linux
 
 fclean: clean
 	rm -f $(NAME)
-	@make fclean -s -C${INCDIR}/libft
+# @make fclean -s -C${INCDIR}/libft
 
 re: fclean all
 
-.PHONY: all clean fclean re bonus libft minilibx
+.PHONY: all clean fclean re bonus minilibx

@@ -6,11 +6,11 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 08:01:37 by owalsh            #+#    #+#             */
-/*   Updated: 2022/05/26 15:39:38 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/06/26 21:27:30 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "so_long.h"
 
 int	ft_strlen(char *s)
 {
@@ -39,7 +39,7 @@ int	has_nl(char *s)
 	return (0);
 }
 
-char	*ft_sjoin(char *s1, char *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	int		i;
 	int		j;

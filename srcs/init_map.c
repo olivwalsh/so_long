@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 20:53:41 by owalsh            #+#    #+#             */
-/*   Updated: 2022/06/26 23:20:43 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/06/27 19:56:13 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,39 +20,54 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-void	init_map(void *mlx, void *mlx_win, char **map)
+t_game	*init_game()
 {
-	// void	*img_from_xpm;
-	// char	*path;
-	// int		img_width;
-	// int		img_height;
+	t_game	*game;
+	
+	game = malloc(sizeof(t_game));
+	if (!game)
+		return (NULL);
+	game->mlx = NULL;
+	game->mlx_win = NULL;
+	game->tab = NULL;
+	return (game);
+}
+
+void	display_square(t_game *game, char c, int x, int y)
+{
+	void	*img_from_xpm;
+	char	*path;
+	int		img_width;
+	int		img_height;
+	
+	path = NULL;
+	if (c == '0')
+		path = "./imgs/ground_small.xpm";
+	else if (c == '1')
+		path = "./imgs/wall2small.xpm";
+	img_from_xpm = mlx_xpm_file_to_image(game->mlx, path, &img_width, &img_height);
+	mlx_put_image_to_window(game->mlx, game->mlx_win, img_from_xpm, x + 64, y + 64);
+}
+
+void	init_map(t_game *game)
+{
+
 	int		x;
 	int		y;
-
-	// path = NULL;
-	(void)mlx;
-	(void)mlx_win;
+	char 	c;
+	
 	y = 0;
-	printf("1\n");
-	while (map[y])
+	while (game->tab[y])
 	{
-		printf("1\n");
 		x = 0;
-		while (map[x])
+		while (game->tab[x])
 		{
-			printf("%c ", map[x][y]);
+			c = game->tab[x][y];
+			display_square(game, c, x, y);
+			printf("%c ", c);
 			x++;
 		}
+		y++;
 		printf("\n");
-		
 	}
-	// if (c == '0')
-	// 	path = "./imgs/ground_small.xpm";
-	// else if (c == '1')
-	// 	path = "./imgs/wall2small.xpm";
-	// printf("segfault before img_from_xpm\n");
-	// img_from_xpm = mlx_xpm_file_to_image(mlx, path, &img_width, &img_height);
-	// printf("segfault after img_from_xpm\n");
-	// mlx_put_image_to_window(mlx, mlx_win, img_from_xpm, x, y);
-	// printf("segfault after put image to window\n");
 }

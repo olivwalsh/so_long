@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 12:56:06 by owalsh            #+#    #+#             */
-/*   Updated: 2022/06/26 23:08:56 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/06/27 19:44:15 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,23 +29,28 @@ int	key_hook(int keycode, void *vars)
 	return (0);
 }
 
+int	loop_function(t_game *game)
+{
+	game->mlx = mlx_init();
+	game->mlx_win = mlx_new_window(game->mlx, 1920, 1080, "So Long");
+	init_map(game);
+	mlx_loop(game->mlx);
+	return (0);
+}
+
 int	main(int argc, char **argv)
 {
-	void	*mlx;
-	void	*mlx_win;
-	char		**tab;
+	t_game	*game;
 
-	tab = NULL;
+	game = init_game();
 	if (argc == 1)
 		return (0);
 	else if (argc > 2)
 		return (error());
-	if (parse_map(argv[1], tab))
+	if (parse_map(argv[1], &game))
 	{
-		mlx = mlx_init();
-		mlx_win = mlx_new_window(mlx, 1920, 1080, "Hello world!");
-		init_map(mlx, mlx_win, tab);
-		mlx_loop(mlx);
+		loop_function(game);
+		
 	}
 	else
 		return (error());

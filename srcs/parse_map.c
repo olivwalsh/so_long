@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 13:03:21 by owalsh            #+#    #+#             */
-/*   Updated: 2022/06/26 23:28:32 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/06/27 19:50:10 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,28 +35,29 @@ void	fill_line(char *line, char **tab, int j)
 	i = 0;
 	while (i < j)
 	{
-		*tab[i] = line[i];
+		(*tab)[i] = line[i];
 		i++;
 	}
-	*tab = '\0';
+	(*tab)[i] = '\0';
 }
 
-int		fill_tab(char *map, char **tab, int y)
+int		fill_tab(char *map, t_game **game, int y)
 {
 	char	*line;
 	int		fd;
 	int		j;
+	char	**tab;
 
-	printf("in fill tab\n");
 	fd = open(map, O_RDONLY);
 	line = get_next_line(fd);
 	tab = malloc(sizeof(char *) * (y + 1));
 	if (!tab)
 		return (0);
+	y = 0;
 	while (line)
 	{
 		j = 0;
-		while (line[j] != '\n')
+		while (line && line[j] && line[j] != '\n')
 			j++;
 		tab[y] = malloc(sizeof(char) * (j + 1));
 		if (!tab[y])
@@ -69,10 +70,11 @@ int		fill_tab(char *map, char **tab, int y)
 		y++;
 	}
 	tab[y] = NULL;
+	(*game)->tab = tab;
 	return (1);
 }
 
-int		parse_map(char *map, char **tab)
+int		parse_map(char *map, t_game **game)
 {
 	char	*line;
 	int		fd;
@@ -85,9 +87,8 @@ int		parse_map(char *map, char **tab)
 	y = 0;
 	while (line)
 	{
-		printf("line n.%d\n", y);
 		x = 0;
-		while (line[x] && line[x] != '\n')
+		while (line && line[x] && line[x] != '\n')
 		{
 			// printf("line[%d][%d] = %c ", y, x, line[x]);
 			if (!is_valid(line[x]))
@@ -105,6 +106,5 @@ int		parse_map(char *map, char **tab)
 		free(line);
 		line = get_next_line(fd);
 	}
-	
-	return (fill_tab(map, tab, x));
+	return (fill_tab(map, game, x));
 }

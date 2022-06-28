@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 20:53:41 by owalsh            #+#    #+#             */
-/*   Updated: 2022/06/27 19:56:13 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/06/28 20:00:27 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,13 @@ void	display_square(t_game *game, char c, int x, int y)
 	
 	path = NULL;
 	if (c == '0')
-		path = "./imgs/ground_small.xpm";
+		path = "./imgs/ground_resized.xpm";
 	else if (c == '1')
-		path = "./imgs/wall2small.xpm";
+		path = "./imgs/wall_resized.xpm";
+	else if (c == 'P')
+		path = "./imgs/p.xpm";
 	img_from_xpm = mlx_xpm_file_to_image(game->mlx, path, &img_width, &img_height);
-	mlx_put_image_to_window(game->mlx, game->mlx_win, img_from_xpm, x + 64, y + 64);
+	mlx_put_image_to_window(game->mlx, game->mlx_win, img_from_xpm, x * 100, y * 100);
 }
 
 void	init_map(t_game *game)
@@ -60,14 +62,13 @@ void	init_map(t_game *game)
 	while (game->tab[y])
 	{
 		x = 0;
-		while (game->tab[x])
+		while (game->tab[y][x])
 		{
-			c = game->tab[x][y];
+			c = game->tab[y][x];
 			display_square(game, c, x, y);
 			printf("%c ", c);
 			x++;
 		}
 		y++;
-		printf("\n");
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 12:56:02 by owalsh            #+#    #+#             */
-/*   Updated: 2022/06/27 19:44:44 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/06/28 19:02:52 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ typedef struct s_game {
 	void 	*mlx;
 	void	*mlx_win;
 	char	**tab;
+	int		length;
+	int		width;
 }				t_game;
 
 # include <stdio.h>

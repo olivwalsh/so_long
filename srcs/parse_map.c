@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 13:03:21 by owalsh            #+#    #+#             */
-/*   Updated: 2022/06/27 19:50:10 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/06/28 19:25:53 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int		fill_tab(char *map, t_game **game, int y)
 	while (line)
 	{
 		j = 0;
-		while (line && line[j] && line[j] != '\n')
+		while (line[j] && line[j] != '\n')
 			j++;
 		tab[y] = malloc(sizeof(char) * (j + 1));
 		if (!tab[y])
@@ -88,9 +88,8 @@ int		parse_map(char *map, t_game **game)
 	while (line)
 	{
 		x = 0;
-		while (line && line[x] && line[x] != '\n')
+		while (line[x] && line[x] != '\n')
 		{
-			// printf("line[%d][%d] = %c ", y, x, line[x]);
 			if (!is_valid(line[x]))
 			{
 				free(line);
@@ -106,5 +105,7 @@ int		parse_map(char *map, t_game **game)
 		free(line);
 		line = get_next_line(fd);
 	}
+	(*game)->length = y;
+	(*game)->width = x;
 	return (fill_tab(map, game, x));
 }

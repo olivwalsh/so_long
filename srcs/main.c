@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: olivia <olivia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 12:56:06 by owalsh            #+#    #+#             */
-/*   Updated: 2022/06/28 19:25:45 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/06/29 19:05:11 by olivia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,23 +18,13 @@ int	error()
 	return (0);
 }
 
-int	key_hook(int keycode, void *vars)
-{
-	(void)vars;
-	printf("Hello from key_hook!\n");
-	if (keycode == 2)
-		printf("right\n");
-	if (keycode == 1)
-		printf("down");
-	return (0);
-}
-
 int	loop_function(t_game *game)
 {
 	game->mlx = mlx_init();
 	game->mlx_win = mlx_new_window(game->mlx, game->width * 100, game->length * 100, "So Long");
 	// game->mlx_win = mlx_new_window(game->mlx, 1000, 1000, "So Long");
 	init_map(game);
+	mlx_hook(game->mlx_win, 2, 1L<<0, &key_hook, game);
 	mlx_loop(game->mlx);
 	return (0);
 }

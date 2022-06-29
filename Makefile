@@ -4,7 +4,7 @@ RESET = "\033[m"
 
 NAME = so_long
 
-CC = gcc
+CC = cc
 
 CFLAGS = -Wall -Wextra -Werror 
 
@@ -12,7 +12,9 @@ SRC =	srcs/main.c \
 		srcs/parse_map.c \
 		srcs/init_map.c \
 		srcs/get_next_line.c \
-		srcs/get_next_line_utils.c
+		srcs/get_next_line_utils.c \
+		srcs/key_events.c \
+		srcs/win_events.c 
 
 OBJDIR = objs
 

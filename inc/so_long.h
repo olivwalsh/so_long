@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: olivia <olivia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 12:56:02 by owalsh            #+#    #+#             */
-/*   Updated: 2022/06/28 19:02:52 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/06/29 19:05:42 by olivia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,10 @@
 # define SO_LONG_H
 
 # define BUFFER_SIZE 1024
-
+# define KEY_RIGHT 100
+# define KEY_LEFT 97
+# define KEY_UP 119
+# define KEY_DOWN 115
 typedef struct	s_data {
 	void	*img;
 	char	*addr;
@@ -53,5 +56,9 @@ int		has_nl(char *s);
 int		ft_strlen(char *s);
 char	*ft_strjoin(char *s1, char *s2);
 void	clean_buf(char *buf);
+// FILE key_events.c
+int		key_hook(int keycode, t_game *game);
+// FILE win_events.c
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 
 #endif

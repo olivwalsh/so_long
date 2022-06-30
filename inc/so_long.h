@@ -6,7 +6,7 @@
 /*   By: olivia <olivia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 12:56:02 by owalsh            #+#    #+#             */
-/*   Updated: 2022/06/29 19:05:42 by olivia           ###   ########.fr       */
+/*   Updated: 2022/06/30 11:34:36 by olivia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,5 @@ void	clean_buf(char *buf);
 int		key_hook(int keycode, t_game *game);
 // FILE win_events.c
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
-
+int	sl_close(t_game *data);
 #endif

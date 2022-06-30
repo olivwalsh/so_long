@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: olivia <olivia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 13:03:21 by owalsh            #+#    #+#             */
-/*   Updated: 2022/06/28 19:25:53 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/06/29 19:25:11 by olivia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int		is_valid(char c)
+int	is_valid(char c)
 {
 	char	*valids;
 	int		i;
@@ -41,7 +41,7 @@ void	fill_line(char *line, char **tab, int j)
 	(*tab)[i] = '\0';
 }
 
-int		fill_tab(char *map, t_game **game, int y)
+int	fill_tab(char *map, t_game **game, int y)
 {
 	char	*line;
 	int		fd;
@@ -74,14 +74,14 @@ int		fill_tab(char *map, t_game **game, int y)
 	return (1);
 }
 
-int		parse_map(char *map, t_game **game)
+int	parse_map(char *map, t_game **game)
 {
 	char	*line;
 	int		fd;
 	int		x;
 	int		y;
 	int		prev_x;
-	
+
 	fd = open(map, O_RDONLY);
 	line = get_next_line(fd);
 	y = 0;

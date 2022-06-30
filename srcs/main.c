@@ -6,26 +6,27 @@
 /*   By: olivia <olivia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 12:56:06 by owalsh            #+#    #+#             */
-/*   Updated: 2022/06/29 19:05:11 by olivia           ###   ########.fr       */
+/*   Updated: 2022/06/30 11:36:36 by olivia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	error()
+int	error(void)
 {
 	write(2, "Error\n", 6);
 	return (0);
 }
 
-int	loop_function(t_game *game)
+int	loop_function(t_game *g)
 {
-	game->mlx = mlx_init();
-	game->mlx_win = mlx_new_window(game->mlx, game->width * 100, game->length * 100, "So Long");
-	// game->mlx_win = mlx_new_window(game->mlx, 1000, 1000, "So Long");
-	init_map(game);
-	mlx_hook(game->mlx_win, 2, 1L<<0, &key_hook, game);
-	mlx_loop(game->mlx);
+	g->mlx = mlx_init();
+	g->mlx_win = mlx_new_window(g->mlx, g->width * 100, g->length * 100, "So Long");
+	init_map(g);
+	mlx_hook(g->mlx_win, 2, 1L << 0, &key_hook, g);
+	//mlx_hook(g->mlx_win, 3, 1L << 1, &key_hook, g);
+	mlx_hook(g->mlx_win, 33, 1L << 2, &sl_close, g);
+	mlx_loop(g->mlx);
 	return (0);
 }
 

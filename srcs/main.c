@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olivia <olivia@student.42.fr>              +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 12:56:06 by owalsh            #+#    #+#             */
-/*   Updated: 2022/06/30 11:36:36 by olivia           ###   ########.fr       */
+/*   Updated: 2022/06/30 12:28:58 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,14 @@ int	loop_function(t_game *g)
 
 int	main(int argc, char **argv)
 {
-	t_game	*game;
+	t_game	game;
 
-	game = init_game();
 	if (argc == 1)
 		return (0);
 	else if (argc > 2)
 		return (error());
 	if (parse_map(argv[1], &game))
-	{
-		loop_function(game);
-	}
+		loop_function(&game);
 	else
 		return (error());
 }

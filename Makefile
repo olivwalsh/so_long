@@ -13,7 +13,7 @@ SRC =	srcs/main.c \
 		srcs/init_map.c \
 		srcs/get_next_line.c \
 		srcs/get_next_line_utils.c \
-		srcs/key_events.c \
+		srcs/moves.c \
 		srcs/win_events.c 
 
 OBJDIR = objs
@@ -28,8 +28,6 @@ MLX = -L./${INCDIR}/minilibx-linux -lmlx
 
 MLXLIBX = -lXext -lX11 -lm -lz 
 
-# LIBFT = -L./${INCDIR}/libft -lft
-
 all: $(NAME) 
 
 $(NAME): $(OBJ) minilibx
@@ -39,11 +37,6 @@ ${OBJDIR}/%.o : %.c
 	mkdir -p ${@D}
 	$(CC) $(CFLAGS) $(INC) -c $< -o $@
 
-# libft:
-# 	@echo -n "Compiling libft"
-# 	@make -s -C${INCDIR}/libft
-# 	@echo ${GREEN}"\t\tOK"${RESET}
-
 minilibx:
 	@echo -n "Compiling minilibx"
 	@make -s -C${INCDIR}/minilibx-linux > /dev/null 2>&1
@@ -51,12 +44,10 @@ minilibx:
 
 clean :
 	rm -rf $(OBJDIR)
-# @make clean -s -C${INCDIR}/libft
 	@make clean -s -C${INCDIR}/minilibx-linux
 
 fclean: clean
 	rm -f $(NAME)
-# @make fclean -s -C${INCDIR}/libft
 
 re: fclean all
 

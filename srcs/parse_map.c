@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olivia <olivia@student.42.fr>              +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 13:03:21 by owalsh            #+#    #+#             */
-/*   Updated: 2022/06/29 19:25:11 by olivia           ###   ########.fr       */
+/*   Updated: 2022/06/30 12:42:02 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	fill_line(char *line, char **tab, int j)
 	(*tab)[i] = '\0';
 }
 
-int	fill_tab(char *map, t_game **game, int y)
+int	fill_tab(char *map, t_game *game, int y)
 {
 	char	*line;
 	int		fd;
@@ -66,15 +66,16 @@ int	fill_tab(char *map, t_game **game, int y)
 			return (0);
 		}
 		fill_line(line, &tab[y], j);
+		free(line);
 		line = get_next_line(fd);
 		y++;
 	}
 	tab[y] = NULL;
-	(*game)->tab = tab;
+	game->tab = tab;
 	return (1);
 }
 
-int	parse_map(char *map, t_game **game)
+int	parse_map(char *map, t_game *game)
 {
 	char	*line;
 	int		fd;
@@ -105,7 +106,7 @@ int	parse_map(char *map, t_game **game)
 		free(line);
 		line = get_next_line(fd);
 	}
-	(*game)->length = y;
-	(*game)->width = x;
+	game->length = y;
+	game->width = x;
 	return (fill_tab(map, game, x));
 }

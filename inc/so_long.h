@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olivia <olivia@student.42.fr>              +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 12:56:02 by owalsh            #+#    #+#             */
-/*   Updated: 2022/06/30 11:34:36 by olivia           ###   ########.fr       */
+/*   Updated: 2022/06/30 15:02:01 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # define KEY_LEFT 97
 # define KEY_UP 119
 # define KEY_DOWN 115
+
 typedef struct	s_data {
 	void	*img;
 	char	*addr;
@@ -43,13 +44,14 @@ typedef struct s_game {
 # include <unistd.h>
 
 // FILE parse_map.c
-int		parse_map(char *map, t_game **game);
-int		fill_tab(char *map, t_game **game, int y);
+int		parse_map(char *map, t_game *game);
+int		fill_tab(char *map, t_game *game, int y);
 void	fill_line(char *line, char **tab, int j);
 // FILE init_map.c
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void	init_map(t_game *game);
 t_game	*init_game();
+void	display_square(t_game *game, char c, int x, int y);
 // FILE get_next_line.c
 char	*get_next_line(int fd);
 int		has_nl(char *s);

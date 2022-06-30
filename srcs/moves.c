@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   moves.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: olivia <olivia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 19:00:07 by olivia            #+#    #+#             */
-/*   Updated: 2022/06/30 15:21:53 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/06/30 16:06:28 by olivia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,5 +130,8 @@ int	key_hook(int keycode, t_game *game)
 		return (move_up(game));
 	else if (keycode == KEY_DOWN)
 		return (move_down(game));
+	else if (keycode == 27)
+		printf ("escape pressed\n");
+	// return (sl_close(game));
 	return (0);
 }

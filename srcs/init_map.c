@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: olivia <olivia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 20:53:41 by owalsh            #+#    #+#             */
-/*   Updated: 2022/06/30 14:54:59 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/06/30 17:13:11 by olivia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	display_square(t_game *game, char c, int x, int y)
 	else if (c == '1')
 		path = "./imgs/wall.xpm";
 	else if (c == 'P')
-		path = "./imgs/p.xpm";
+		path = "./imgs/p2.xpm";
 	else if (c == 'C')
 		path = "./imgs/collect.xpm";
 	else if (c == 'E')

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: olivia <olivia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 12:56:02 by owalsh            #+#    #+#             */
-/*   Updated: 2022/06/30 15:02:01 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/06/30 17:44:51 by olivia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ typedef struct s_game {
 	char	**tab;
 	int		length;
 	int		width;
+	int		moves;
+	int		collectibles;
 }				t_game;
 
 # include <stdio.h>
@@ -62,5 +64,6 @@ void	clean_buf(char *buf);
 int		key_hook(int keycode, t_game *game);
 // FILE win_events.c
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
-int	sl_close(t_game *data);
+int		sl_close(t_game *data);
+// FILE so_long_utils.c
 #endif

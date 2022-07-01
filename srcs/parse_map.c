@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
+/*   By: olivia <olivia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 13:03:21 by owalsh            #+#    #+#             */
-/*   Updated: 2022/06/30 12:42:02 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/06/30 17:44:26 by olivia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,17 +41,28 @@ void	fill_line(char *line, char **tab, int j)
 	(*tab)[i] = '\0';
 }
 
+int	parsing_error(char *line, char **tab, int y)
+{
+	while (y > 0)
+	{
+		free(tab[y]);
+		y--;
+	}
+	free(tab);
+	free(line);
+	return (0);
+}
+
 int	fill_tab(char *map, t_game *game, int y)
 {
 	char	*line;
 	int		fd;
 	int		j;
-	char	**tab;
 
 	fd = open(map, O_RDONLY);
 	line = get_next_line(fd);
-	tab = malloc(sizeof(char *) * (y + 1));
-	if (!tab)
+	game->tab = malloc(sizeof(char *) * (y + 1));
+	if (!game->tab)
 		return (0);
 	y = 0;
 	while (line)
@@ -59,19 +70,15 @@ int	fill_tab(char *map, t_game *game, int y)
 		j = 0;
 		while (line[j] && line[j] != '\n')
 			j++;
-		tab[y] = malloc(sizeof(char) * (j + 1));
-		if (!tab[y])
-		{
-			free(line);
-			return (0);
-		}
-		fill_line(line, &tab[y], j);
+		game->tab[y] = malloc(sizeof(char) * (j + 1));
+		if (!game->tab[y])
+			return (parsing_error(line, game->tab, y));
+		fill_line(line, &game->tab[y], j);
 		free(line);
 		line = get_next_line(fd);
 		y++;
 	}
-	tab[y] = NULL;
-	game->tab = tab;
+	game->tab[y] = NULL;
 	return (1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 19:02:15 by olivia            #+#    #+#             */
-/*   Updated: 2022/06/30 13:30:26 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/07/06 15:38:03 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 int	sl_close(t_game *game)
 {
 	(void)game;
-	//free shit
 	free(game->mlx);
 	free(game->tab);
 	exit(0);

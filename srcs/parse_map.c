@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 13:03:21 by owalsh            #+#    #+#             */
-/*   Updated: 2022/07/01 18:06:16 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/07/06 16:12:57 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,13 @@ int	parsing_error(char *line, char **tab, int y)
 	return (0);
 }
 
-int	fill_tab(char *map, t_game *game, int y)
+int	fill_tab(char *map_path, t_game *game, int y)
 {
 	char	*line;
 	int		fd;
 	int		j;
 
-	fd = open(map, O_RDONLY);
+	fd = open(map_path, O_RDONLY);
 	line = get_next_line(fd);
 	game->tab = malloc(sizeof(char *) * (y + 1));
 	if (!game->tab)
@@ -82,38 +82,55 @@ int	fill_tab(char *map, t_game *game, int y)
 	return (1);
 }
 
-int	parse_map(char *map, t_game *game)
+int	parse_map_error(char *str)
 {
-	char	*line;
-	int		fd;
+	free(str);
+	return (0);
+}
+
+int	check_line_len(t_game *game)
+{
 	int		x;
 	int		y;
 	int		prev_x;
 
-	fd = open(map, O_RDONLY);
-	line = get_next_line(fd);
 	y = 0;
-	while (line)
+	while (game->tab[y])
 	{
 		x = 0;
-		while (line[x] && line[x] != '\n')
-		{
-			if (!is_valid(line[x]))
-			{
-				free(line);
-				return (0);
-			}
+		while (game->tab[y][x] && game->tab[y][x] != '\n')
 			x++;
-		}
 		if (y == 0)
 			prev_x = x;
 		if (y != 0 && prev_x != x)
 			return (0);
 		y++;
-		free(line);
-		line = get_next_line(fd);
 	}
 	game->length = y;
 	game->width = x;
-	return (fill_tab(map, game, x));
+	return (1);
+}
+
+int	parse_map(char *argv, t_game *game)
+{
+	int		x;
+	int		y;
+
+	if (!fill_tab(argv, game, x))
+		return (0);
+	if (!check_line_len(game))
+		return (0);
+	y = 0;
+	while (game->tab[y])
+	{
+		x = 0;
+		while (game->tab[y][x] && game->tab[y][x] != '\n')
+		{
+			if (!is_valid(game->tab[y][x]))
+				return (0);
+			x++;
+		}
+		y++;
+	}
+	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: olivia <olivia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 12:56:02 by owalsh            #+#    #+#             */
-/*   Updated: 2022/06/30 17:44:51 by olivia           ###   ########.fr       */
+/*   Updated: 2022/07/10 14:22:58 by olivia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,13 @@ typedef struct s_game {
 
 // FILE parse_map.c
 int		parse_map(char *map, t_game *game);
-int		fill_tab(char *map, t_game *game, int y);
-void	fill_line(char *line, char **tab, int j);
+int		fill_tab(char *map, t_game *game);
+int		fill_line(char *line, char **tab, int j);
 // FILE init_map.c
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void	init_map(t_game *game);
 t_game	*init_game();
-void	display_square(t_game *game, char c, int x, int y);
+void	display_square(t_game *game, char c, int x, int y, char dir);
 // FILE get_next_line.c
 char	*get_next_line(int fd);
 int		has_nl(char *s);
@@ -65,5 +65,11 @@ int		key_hook(int keycode, t_game *game);
 // FILE win_events.c
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 int		sl_close(t_game *data);
-// FILE so_long_utils.c
+// FILE parse_utils.c
+int	is_valid(char c);
+int	parsing_error(char *line, char **tab, int y);
+int	ft_strncmp(char *s1, char *s2, int n);
+int	in_map(t_game *game, char c);
+int	is_file(char *s);
+
 #endif

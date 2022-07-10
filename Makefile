@@ -10,6 +10,7 @@ CFLAGS = -Wall -Wextra -Werror
 
 SRC =	srcs/main.c \
 		srcs/parse_map.c \
+		srcs/parse_utils.c \
 		srcs/init_map.c \
 		srcs/get_next_line.c \
 		srcs/get_next_line_utils.c \

@@ -6,13 +6,24 @@
 /*   By: olivia <olivia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 20:53:41 by owalsh            #+#    #+#             */
-/*   Updated: 2022/06/30 17:13:11 by olivia           ###   ########.fr       */
+/*   Updated: 2022/07/10 14:25:11 by olivia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	display_square(t_game *game, char c, int x, int y)
+char	*player_direction(char dir)
+{
+	if (dir == 'U')
+		return ("./imgs/player/up.xpm");
+	else if (dir == 'D')
+		return ("./imgs/player/down.xpm");
+	else if (dir == 'L')
+		return ("./imgs/player/left.xpm");
+	else
+		return ("./imgs/player/right.xpm");
+}
+void	display_square(t_game *game, char c, int x, int y, char dir)
 {
 	void	*img;
 	char	*path;
@@ -21,15 +32,15 @@ void	display_square(t_game *game, char c, int x, int y)
 
 	path = NULL;
 	if (c == '0')
-		path = "./imgs/ground_resized.xpm";
+		path = "./imgs/ground.xpm";
 	else if (c == '1')
 		path = "./imgs/wall.xpm";
 	else if (c == 'P')
-		path = "./imgs/p2.xpm";
+		path = player_direction(dir);
 	else if (c == 'C')
-		path = "./imgs/collect.xpm";
+		path = "./imgs/collectible.xpm";
 	else if (c == 'E')
-		path = "./imgs/ex.xpm";
+		path = "./imgs/exit.xpm";
 	img = mlx_xpm_file_to_image(game->mlx, path, &img_width, &img_height);
 	mlx_put_image_to_window(game->mlx, game->mlx_win, img, x * 100, y * 100);
 }
@@ -47,7 +58,7 @@ void	init_map(t_game *game)
 		while (game->tab[y][x])
 		{
 			c = game->tab[y][x];
-			display_square(game, c, x, y);
+			display_square(game, c, x, y, 'R');
 			x++;
 		}
 		y++;

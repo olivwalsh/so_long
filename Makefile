@@ -9,11 +9,11 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror 
 
 SRC =	srcs/main.c \
+		srcs/utils/get_next_line.c \
+		srcs/utils/get_next_line_utils.c \
 		srcs/parse_map.c \
 		srcs/parse_utils.c \
 		srcs/init_map.c \
-		srcs/get_next_line.c \
-		srcs/get_next_line_utils.c \
 		srcs/moves.c \
 		srcs/win_events.c 
 

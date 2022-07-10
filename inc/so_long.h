@@ -6,7 +6,7 @@
 /*   By: olivia <olivia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 12:56:02 by owalsh            #+#    #+#             */
-/*   Updated: 2022/07/10 15:16:30 by olivia           ###   ########.fr       */
+/*   Updated: 2022/07/10 19:41:41 by olivia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ typedef struct s_game {
 
 # include <stdio.h>
 # include "minilibx-linux/mlx.h"
-# include "../inc/get_next_line/get_next_line.h"
+# include "get_next_line/get_next_line.h"
 # include <stdlib.h>
 # include <sys/stat.h>
 # include <fcntl.h>
@@ -55,22 +55,17 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void	init_map(t_game *game);
 t_game	*init_game();
 void	display_square(t_game *game, char c, int x, int y);
-// FILE get_next_line.c
-char	*get_next_line(int fd);
-int		has_nl(char *s);
-int		ft_strlen(char *s);
-char	*ft_strjoin(char *s1, char *s2);
-void	clean_buf(char *buf);
 // FILE key_events.c
 int		key_hook(int keycode, t_game *game);
 // FILE win_events.c
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 int		sl_close(t_game *data);
+int		exit_game(t_game *game);
+int		move(t_game *game, int x, int y);
 // FILE parse_utils.c
-int	is_valid(char c);
-int	parsing_error(char *line, char **tab, int y);
-int	ft_strncmp(char *s1, char *s2, int n);
-int	in_map(t_game *game, char c);
-int	is_file(char *s);
+int		is_valid(char c);
+int		parsing_error(char *line, char **tab, int y);
+int		ft_strncmp(char *s1, char *s2, int n);
+int		in_map(t_game *game, char c);
+int		is_file(char *s);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: olivia <olivia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 19:02:15 by olivia            #+#    #+#             */
-/*   Updated: 2022/07/08 12:05:32 by olivia           ###   ########.fr       */
+/*   Updated: 2022/07/10 19:43:43 by olivia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,4 +18,29 @@ int	sl_close(t_game *game)
 	free(game->mlx);
 	free(game->tab);
 	exit(0);
+}
+
+int	exit_game(t_game *game)
+{
+	if (in_map(game, 'C') > 0)
+		return (0);
+	sl_close(game);
+	return (1);
+}
+
+int	move(t_game *game, int x, int y)
+{
+	game->tab[y][x] = '0';
+	display_square(game, game->tab[y][x], x, y);
+	if (game->dir == 'R')
+		x++;
+	else if (game->dir == 'L')
+		x--;
+	else if (game->dir == 'U')
+		y--;
+	else if (game->dir == 'D')
+		y++;
+	game->tab[y][x] = 'P';
+	display_square(game, game->tab[y][x], x, y);
+	return (1);
 }

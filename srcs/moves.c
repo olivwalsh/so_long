@@ -6,7 +6,7 @@
 /*   By: olivia <olivia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 19:00:07 by olivia            #+#    #+#             */
-/*   Updated: 2022/07/10 15:18:53 by olivia           ###   ########.fr       */
+/*   Updated: 2022/07/10 19:51:23 by olivia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,15 @@ int	move_right(t_game *game)
 		x = 0;
 		while (game->tab[y][x])
 		{
-			if (game->tab[y][x] == 'P'
-				&& (game->tab[y][x + 1] == '0' || game->tab[y][x + 1] == 'C'))
+			if (game->tab[y][x] == 'P')
 			{
-				game->tab[y][x] = '0';
-				game->tab[y][x + 1] = 'P';
-				display_square(game, game->tab[y][x], x, y);
-				display_square(game, game->tab[y][x + 1], x + 1, y);
-				return (1);
+				if (game->tab[y][x + 1] == '0' || game->tab[y][x + 1] == 'C')
+					return (move(game, x, y));
+				else if (game->tab[y][x + 1] == 'E' && !in_map(game, 'C'))
+				{
+					move(game, x, y);
+					return (exit_game(game));
+				}
 			}
 			x++;
 		}
@@ -52,14 +53,15 @@ int	move_left(t_game *game)
 		x = 0;
 		while (game->tab[y][x])
 		{
-			if (game->tab[y][x] == 'P'
-				&& (game->tab[y][x - 1] == '0' || game->tab[y][x - 1] == 'C'))
+			if (game->tab[y][x] == 'P')
 			{
-				game->tab[y][x] = '0';
-				game->tab[y][x - 1] = 'P';
-				display_square(game, game->tab[y][x], x, y);
-				display_square(game, game->tab[y][x - 1], x - 1, y);
-				return (1);
+				if (game->tab[y][x - 1] == '0' || game->tab[y][x - 1] == 'C')
+					return (move(game, x, y));
+				else if (game->tab[y][x - 1] == 'E' && !in_map(game, 'C'))
+				{
+					move(game, x, y);
+					return (exit_game(game));
+				}
 			}
 			x++;
 		}
@@ -80,14 +82,15 @@ int	move_up(t_game *game)
 		x = 0;
 		while (game->tab[y][x])
 		{
-			if (game->tab[y][x] == 'P'
-				&& (game->tab[y - 1][x] == '0' || game->tab[y - 1][x] == 'C'))
+			if (game->tab[y][x] == 'P')
 			{
-				game->tab[y][x] = '0';
-				game->tab[y - 1][x] = 'P';
-				display_square(game, game->tab[y][x], x, y);
-				display_square(game, game->tab[y - 1][x], x, y - 1);
-				return (1);
+				if (game->tab[y - 1][x] == '0' || game->tab[y - 1][x] == 'C')
+					return (move(game, x, y));
+				else if (game->tab[y - 1][x] == 'E' && !in_map(game, 'C'))
+				{
+					move(game, x, y);
+					return (exit_game(game));
+				}
 			}
 			x++;
 		}
@@ -108,14 +111,15 @@ int	move_down(t_game *game)
 		x = 0;
 		while (game->tab[y][x])
 		{
-			if (game->tab[y][x] == 'P'
-				&& (game->tab[y + 1][x] == '0' || game->tab[y + 1][x] == 'C'))
+			if (game->tab[y][x] == 'P')
 			{
-				game->tab[y][x] = '0';
-				game->tab[y + 1][x] = 'P';
-				display_square(game, game->tab[y][x], x, y);
-				display_square(game, game->tab[y + 1][x], x, y + 1);
-				return (1);
+				if (game->tab[y + 1][x] == '0' || game->tab[y + 1][x] == 'C')
+					return (move(game, x, y));
+				else if (game->tab[y + 1][x] == 'E' && !in_map(game, 'C'))
+				{
+					move(game, x, y);
+					return (exit_game(game));
+				}
 			}
 			x++;
 		}

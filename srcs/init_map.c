@@ -6,7 +6,7 @@
 /*   By: olivia <olivia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 20:53:41 by owalsh            #+#    #+#             */
-/*   Updated: 2022/07/10 14:25:11 by olivia           ###   ########.fr       */
+/*   Updated: 2022/07/10 15:19:40 by olivia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ char	*player_direction(char dir)
 	else
 		return ("./imgs/player/right.xpm");
 }
-void	display_square(t_game *game, char c, int x, int y, char dir)
+
+void	display_square(t_game *game, char c, int x, int y)
 {
 	void	*img;
 	char	*path;
@@ -36,7 +37,7 @@ void	display_square(t_game *game, char c, int x, int y, char dir)
 	else if (c == '1')
 		path = "./imgs/wall.xpm";
 	else if (c == 'P')
-		path = player_direction(dir);
+		path = player_direction(game->dir);
 	else if (c == 'C')
 		path = "./imgs/collectible.xpm";
 	else if (c == 'E')
@@ -51,6 +52,7 @@ void	init_map(t_game *game)
 	int		y;
 	char	c;
 
+	game->dir = 'R';
 	y = 0;
 	while (game->tab[y])
 	{
@@ -58,7 +60,7 @@ void	init_map(t_game *game)
 		while (game->tab[y][x])
 		{
 			c = game->tab[y][x];
-			display_square(game, c, x, y, 'R');
+			display_square(game, c, x, y);
 			x++;
 		}
 		y++;

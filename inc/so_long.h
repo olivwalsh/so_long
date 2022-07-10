@@ -6,7 +6,7 @@
 /*   By: olivia <olivia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 12:56:02 by owalsh            #+#    #+#             */
-/*   Updated: 2022/07/10 14:22:58 by olivia           ###   ########.fr       */
+/*   Updated: 2022/07/10 15:16:30 by olivia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct s_game {
 	int		width;
 	int		moves;
 	int		collectibles;
+	char	dir;
 }				t_game;
 
 # include <stdio.h>
@@ -53,7 +54,7 @@ int		fill_line(char *line, char **tab, int j);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void	init_map(t_game *game);
 t_game	*init_game();
-void	display_square(t_game *game, char c, int x, int y, char dir);
+void	display_square(t_game *game, char c, int x, int y);
 // FILE get_next_line.c
 char	*get_next_line(int fd);
 int		has_nl(char *s);

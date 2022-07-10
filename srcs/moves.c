@@ -6,7 +6,7 @@
 /*   By: olivia <olivia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 19:00:07 by olivia            #+#    #+#             */
-/*   Updated: 2022/07/10 14:24:03 by olivia           ###   ########.fr       */
+/*   Updated: 2022/07/10 15:18:53 by olivia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	move_right(t_game *game)
 	int		x;
 	int		y;
 
+	game->dir = 'R';
 	y = 0;
 	while (game->tab[y])
 	{
@@ -28,8 +29,8 @@ int	move_right(t_game *game)
 			{
 				game->tab[y][x] = '0';
 				game->tab[y][x + 1] = 'P';
-				display_square(game, game->tab[y][x], x, y, 'R');
-				display_square(game, game->tab[y][x + 1], x + 1, y, 'R');
+				display_square(game, game->tab[y][x], x, y);
+				display_square(game, game->tab[y][x + 1], x + 1, y);
 				return (1);
 			}
 			x++;
@@ -44,6 +45,7 @@ int	move_left(t_game *game)
 	int		x;
 	int		y;
 
+	game->dir = 'L';
 	y = 0;
 	while (game->tab[y])
 	{
@@ -55,8 +57,8 @@ int	move_left(t_game *game)
 			{
 				game->tab[y][x] = '0';
 				game->tab[y][x - 1] = 'P';
-				display_square(game, game->tab[y][x], x, y, 'L');
-				display_square(game, game->tab[y][x - 1], x - 1, y, 'L');
+				display_square(game, game->tab[y][x], x, y);
+				display_square(game, game->tab[y][x - 1], x - 1, y);
 				return (1);
 			}
 			x++;
@@ -71,6 +73,7 @@ int	move_up(t_game *game)
 	int		x;
 	int		y;
 
+	game->dir = 'U';
 	y = 0;
 	while (game->tab[y])
 	{
@@ -82,8 +85,8 @@ int	move_up(t_game *game)
 			{
 				game->tab[y][x] = '0';
 				game->tab[y - 1][x] = 'P';
-				display_square(game, game->tab[y][x], x, y, 'U');
-				display_square(game, game->tab[y - 1][x], x, y - 1, 'U');
+				display_square(game, game->tab[y][x], x, y);
+				display_square(game, game->tab[y - 1][x], x, y - 1);
 				return (1);
 			}
 			x++;
@@ -98,6 +101,7 @@ int	move_down(t_game *game)
 	int		x;
 	int		y;
 
+	game->dir = 'D';
 	y = 0;
 	while (game->tab[y])
 	{
@@ -109,8 +113,8 @@ int	move_down(t_game *game)
 			{
 				game->tab[y][x] = '0';
 				game->tab[y + 1][x] = 'P';
-				display_square(game, game->tab[y][x], x, y, 'D');
-				display_square(game, game->tab[y + 1][x], x, y + 1, 'D');
+				display_square(game, game->tab[y][x], x, y);
+				display_square(game, game->tab[y + 1][x], x, y + 1);
 				return (1);
 			}
 			x++;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olivia <olivia@student.42.fr>              +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 13:03:21 by owalsh            #+#    #+#             */
-/*   Updated: 2022/07/10 19:18:09 by olivia           ###   ########.fr       */
+/*   Updated: 2022/07/11 19:42:50 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,24 +26,6 @@ int	fill_line(char *line, char **tab, int j)
 	}
 	(*tab)[i] = '\0';
 	return (1);
-}
-
-int	get_map_length(char *map_path)
-{
-	char	*line;
-	int		fd;
-	int		i;
-
-	fd = open(map_path, O_RDONLY);
-	line = get_next_line(fd);
-	i = 0;
-	while (line)
-	{
-		i++;
-		free(line);
-		line = get_next_line(fd);
-	}
-	return (i);
 }
 
 int	fill_tab(char *map_path, t_game *game)
@@ -75,7 +57,7 @@ int	fill_tab(char *map_path, t_game *game)
 	return (1);
 }
 
-int	check_line_len(t_game *game)
+int	is_rectangle(t_game *game)
 {
 	int		x;
 	int		y;
@@ -98,11 +80,36 @@ int	check_line_len(t_game *game)
 	return (1);
 }
 
+int	is_framed(t_game *game)
+{
+	int		x;
+	int		y;
+
+	y = 0;
+	while (game->tab[y])
+	{
+		x = 0;
+		while (game->tab[y][x])
+		{
+			if (game->tab[y][x] != '1')
+			{
+				if (y == 0 || y == game->length - 1)
+					return (0);
+				if (x == 0 || x == game->width - 1)
+					return (0);
+			}
+			x++;
+		}
+		y++;
+	}
+	return (1);
+}
+
 int	parse_map(char *argv, t_game *game)
 {
 	if (!is_file(argv))
 		return (0);
-	if (!fill_tab(argv, game) || !check_line_len(game))
+	if (!fill_tab(argv, game) || !is_rectangle(game) || !is_framed(game))
 		return (0);
 	if (in_map(game, 'P') != 1 || in_map(game, 'E') != 1 || !in_map(game, 'C'))
 		return (0);

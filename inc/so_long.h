@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olivia <olivia@student.42.fr>              +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 12:56:02 by owalsh            #+#    #+#             */
-/*   Updated: 2022/07/10 19:41:41 by olivia           ###   ########.fr       */
+/*   Updated: 2022/07/11 19:43:21 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,7 @@ int		parsing_error(char *line, char **tab, int y);
 int		ft_strncmp(char *s1, char *s2, int n);
 int		in_map(t_game *game, char c);
 int		is_file(char *s);
+// FILE so_long_utils.c
+int		get_map_length(char *map_path);
 
 #endif

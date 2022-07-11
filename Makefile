@@ -15,7 +15,8 @@ SRC =	srcs/main.c \
 		srcs/parse_utils.c \
 		srcs/init_map.c \
 		srcs/moves.c \
-		srcs/win_events.c 
+		srcs/win_events.c  \
+		srcs/so_long_utils.c
 
 OBJDIR = objs
 

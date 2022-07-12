@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olivia <olivia@student.42.fr>              +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 12:56:06 by owalsh            #+#    #+#             */
-/*   Updated: 2022/07/10 15:20:35 by olivia           ###   ########.fr       */
+/*   Updated: 2022/07/12 14:11:45 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	loop_function(t_game *g)
 	g->mlx = mlx_init();
 	g->mlx_win = mlx_new_window(g->mlx, g->width * 100, g->length * 100, \
 		"So Long");
+	g->moves = 0;
 	init_map(g);
 	mlx_hook(g->mlx_win, 2, 1L << 0, &key_hook, g);
 	mlx_hook(g->mlx_win, 33, 1L << 2, &sl_close, g);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   win_events.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olivia <olivia@student.42.fr>              +#+  +:+       +#+        */
+/*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 19:02:15 by olivia            #+#    #+#             */
-/*   Updated: 2022/07/10 19:43:43 by olivia           ###   ########.fr       */
+/*   Updated: 2022/07/12 14:17:32 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int	sl_close(t_game *game)
 {
 	(void)game;
+	mlx_destroy_window(game->mlx, game->mlx_win);
 	free(game->mlx);
 	free(game->tab);
 	exit(0);
@@ -42,5 +43,7 @@ int	move(t_game *game, int x, int y)
 		y++;
 	game->tab[y][x] = 'P';
 	display_square(game, game->tab[y][x], x, y);
+	game->moves++;
+	printf("%d\n", game->moves);
 	return (1);
 }

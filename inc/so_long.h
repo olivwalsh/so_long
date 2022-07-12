@@ -40,6 +40,7 @@ typedef struct s_game {
 
 # include <stdio.h>
 # include "minilibx-linux/mlx.h"
+# include "ft_printf/ft_printf.h"
 # include "get_next_line/get_next_line.h"
 # include <stdlib.h>
 # include <sys/stat.h>
@@ -50,24 +51,30 @@ typedef struct s_game {
 int		parse_map(char *map, t_game *game);
 int		fill_tab(char *map, t_game *game);
 int		fill_line(char *line, char **tab, int j);
+
 // FILE init_map.c
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void	init_map(t_game *game);
 t_game	*init_game();
 void	display_square(t_game *game, char c, int x, int y);
-// FILE key_events.c
+
+// FILE moves.c
 int		key_hook(int keycode, t_game *game);
+
 // FILE win_events.c
 int		sl_close(t_game *data);
 int		exit_game(t_game *game);
-int		move(t_game *game, int x, int y);
+void	free_tab(t_game *game);
+
 // FILE parse_utils.c
 int		is_valid(char c);
-int		parsing_error(char *line, char **tab, int y);
+int		parsing_error(char *line, t_game *game);
 int		ft_strncmp(char *s1, char *s2, int n);
 int		in_map(t_game *game, char c);
 int		is_file(char *s);
+
 // FILE so_long_utils.c
 int		get_map_length(char *map_path);
+int		move(t_game *game, int x, int y);
 
 #endif

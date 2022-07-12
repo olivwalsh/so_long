@@ -28,14 +28,9 @@ int	is_valid(char c)
 	return (0);
 }
 
-int	parsing_error(char *line, char **tab, int y)
+int	parsing_error(char *line, t_game *game)
 {
-	while (y > 0)
-	{
-		free(tab[y]);
-		y--;
-	}
-	free(tab);
+	free_tab(game);
 	free(line);
 	return (0);
 }

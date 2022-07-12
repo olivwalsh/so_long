@@ -29,3 +29,22 @@ int	get_map_length(char *map_path)
 	}
 	return (i);
 }
+
+int	move(t_game *game, int x, int y)
+{
+	game->tab[y][x] = '0';
+	display_square(game, game->tab[y][x], x, y);
+	if (game->dir == 'R')
+		x++;
+	else if (game->dir == 'L')
+		x--;
+	else if (game->dir == 'U')
+		y--;
+	else if (game->dir == 'D')
+		y++;
+	game->tab[y][x] = 'P';
+	display_square(game, game->tab[y][x], x, y);
+	game->moves++;
+	ft_printf("%d\n", game->moves);
+	return (1);
+}

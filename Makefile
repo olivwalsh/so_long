@@ -19,8 +19,8 @@ CFLAGS += -g
 endif
 
 SRC =	srcs/main.c \
-		srcs/utils/get_next_line.c \
-		srcs/utils/get_next_line_utils.c \
+		srcs/utils/get_next_line.c srcs/utils/get_next_line_utils.c \
+		srcs/utils/ft_printf.c srcs/utils/ft_itoa.c srcs/utils/ft_putchar.c srcs/utils/ft_puthex.c srcs/utils/ft_putstr.c \
 		srcs/parse_map.c \
 		srcs/parse_utils.c \
 		srcs/init_map.c \
@@ -63,4 +63,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re bonus minilibx
+.PHONY: all clean fclean re bonus minilibx ft_printf

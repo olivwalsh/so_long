@@ -48,7 +48,7 @@ int	fill_tab(char *map_path, t_game *game)
 			j++;
 		game->tab[y] = malloc(sizeof(char) * (j + 1));
 		if (!game->tab[y] || !fill_line(line, &game->tab[y], j))
-			return (parsing_error(line, game->tab, y));
+			return (parsing_error(line, game));
 		free(line);
 		line = get_next_line(fd);
 		y++;

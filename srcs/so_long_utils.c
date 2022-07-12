@@ -48,3 +48,16 @@ int	move(t_game *game, int x, int y)
 	ft_printf("%d\n", game->moves);
 	return (1);
 }
+
+int	map_fits_screen(t_game *game)
+{
+	int	screen_width;
+	int	screen_height;
+
+	screen_height = 0;
+	screen_width = 0;
+	mlx_get_screen_size(game->mlx, &screen_width, &screen_height);
+	if (game->width * 100 > screen_width || game->length * 100 > screen_height)
+		return (0);
+	return (1);
+}

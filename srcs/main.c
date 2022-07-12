@@ -21,6 +21,12 @@ int	error(void)
 int	loop_function(t_game *g)
 {
 	g->mlx = mlx_init();
+	if (!map_fits_screen(g))
+	{
+		error();
+		ft_printf("Map does not fit screen size.\n");
+		sl_close(g);
+	}
 	g->mlx_win = mlx_new_window(g->mlx, g->width * 100, g->length * 100, \
 		"So Long");
 	g->moves = 0;
@@ -35,6 +41,7 @@ int	main(int argc, char **argv)
 {
 	t_game	game;
 
+	memset(&game, 0, sizeof(t_game));
 	if (argc == 1)
 		return (0);
 	else if (argc > 2)

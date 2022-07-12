@@ -47,6 +47,9 @@ typedef struct s_game {
 # include <fcntl.h>
 # include <unistd.h>
 
+// TESTING
+# include <string.h>
+
 // FILE parse_map.c
 int		parse_map(char *map, t_game *game);
 int		fill_tab(char *map, t_game *game);
@@ -76,5 +79,6 @@ int		is_file(char *s);
 // FILE so_long_utils.c
 int		get_map_length(char *map_path);
 int		move(t_game *game, int x, int y);
+int		map_fits_screen(t_game *game);
 
 #endif

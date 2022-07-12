@@ -8,6 +8,16 @@ CC = cc
 
 CFLAGS = -Wall -Wextra -Werror 
 
+# make TMEM=1 will compile with fsanitize flag
+ifeq ($(TMEM), 1)
+MEM = -fsanitize=address
+endif
+
+# make DEBUG will add -g flag
+ifeq ($(DEBUG), 1)
+CFLAGS += -g
+endif
+
 SRC =	srcs/main.c \
 		srcs/utils/get_next_line.c \
 		srcs/utils/get_next_line_utils.c \
@@ -33,11 +43,11 @@ MLXLIBX = -lXext -lX11 -lm -lz
 all: $(NAME) 
 
 $(NAME): $(OBJ) minilibx
-	$(CC) $(CFLAGS) $(INC) $(OBJ) $(MLX) $(MLXLIBX) -o $@
+	$(CC) $(CFLAGS) $(MEM) $(INC) $(OBJ) $(MLX) $(MLXLIBX) -o $@
 
 ${OBJDIR}/%.o : %.c
 	mkdir -p ${@D}
-	$(CC) $(CFLAGS) $(INC) -c $< -o $@
+	$(CC) $(CFLAGS) $(MEM) $(INC) -c $< -o $@
 
 minilibx:
 	@echo -n "Compiling minilibx"

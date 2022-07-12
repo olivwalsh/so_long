@@ -44,6 +44,7 @@ void	display_square(t_game *game, char c, int x, int y)
 		path = "./imgs/exit.xpm";
 	img = mlx_xpm_file_to_image(game->mlx, path, &img_width, &img_height);
 	mlx_put_image_to_window(game->mlx, game->mlx_win, img, x * 100, y * 100);
+	mlx_destroy_image(game->mlx, img);
 }
 
 void	init_map(t_game *game)

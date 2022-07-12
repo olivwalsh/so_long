@@ -14,9 +14,17 @@
 
 int	sl_close(t_game *game)
 {
-	(void)game;
+	int	y;
+
 	mlx_destroy_window(game->mlx, game->mlx_win);
+	mlx_destroy_display(game->mlx);
 	free(game->mlx);
+	y = game->length;
+	while (y >= 0)
+	{
+		free(game->tab[y]);
+		y--;
+	}
 	free(game->tab);
 	exit(0);
 }

@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 12:56:02 by owalsh            #+#    #+#             */
-/*   Updated: 2022/07/12 14:07:22 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/07/13 17:37:36 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,38 +47,9 @@ typedef struct s_game {
 # include <fcntl.h>
 # include <unistd.h>
 
-// TESTING
-# include <string.h>
+/*
+*** FILE parse.c
+*/
 
-// FILE parse_map.c
-int		parse_map(char *map, t_game *game);
-int		fill_tab(char *map, t_game *game);
-int		fill_line(char *line, char **tab, int j);
-
-// FILE init_map.c
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
-void	init_map(t_game *game);
-t_game	*init_game();
-void	display_square(t_game *game, char c, int x, int y);
-
-// FILE moves.c
-int		key_hook(int keycode, t_game *game);
-
-// FILE win_events.c
-int		sl_close(t_game *data);
-int		exit_game(t_game *game);
-void	free_tab(t_game *game);
-
-// FILE parse_utils.c
-int		is_valid(char c);
-int		parsing_error(char *line, t_game *game);
-int		ft_strncmp(char *s1, char *s2, int n);
-int		in_map(t_game *game, char c);
-int		is_file(char *s);
-
-// FILE so_long_utils.c
-int		get_map_length(char *map_path);
-int		move(t_game *game, int x, int y);
-int		map_fits_screen(t_game *game);
 
 #endif

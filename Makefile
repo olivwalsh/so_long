@@ -24,11 +24,9 @@ ifeq ($(DEBUG), 1)
 CFLAGS += -g
 endif
 
-SRCS =	main.c \
-		utils/get_next_line.c utils/get_next_line_utils.c \
+SRCS =	utils/get_next_line.c utils/get_next_line_utils.c \
 		utils/ft_printf.c utils/ft_itoa.c utils/ft_putchar.c utils/ft_puthex.c utils/ft_putstr.c \
-		parse_map.c parse_utils.c init_map.c \
-		moves.c win_events.c so_long_utils.c
+		main.c parse.c init.c display.c moves.c utils.c exit.c
 
 SRC = $(addprefix $(SRCDIR), $(SRCS))
 OBJ = $(addprefix ${OBJDIR}, ${SRCS:.c=.o})
@@ -65,4 +63,4 @@ fclean: clean
 re: fclean all
 	make all
 
-.PHONY: all clean fclean re bonus minilibx ft_printf
+.PHONY: all clean fclean re

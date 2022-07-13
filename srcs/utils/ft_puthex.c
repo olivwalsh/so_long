@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 17:26:10 by owalsh            #+#    #+#             */
-/*   Updated: 2022/05/11 17:51:22 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/07/13 15:11:33 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int	ft_puthex(int i, char x)
 	int				sum;
 	unsigned int	c;
 
+	base = NULL;
 	if (x == 'x')
 		base = "0123456789abcdef";
 	else if (x == 'X')

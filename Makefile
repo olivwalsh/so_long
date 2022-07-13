@@ -6,7 +6,13 @@ NAME = so_long
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror 
+MINILIBX = $(INCDIR)minilibx-linux/libmlx_Linux.a
+
+CFLAGS = -Wall -Wextra -Werror
+
+OBJDIR = objs/
+SRCDIR = srcs/
+INCDIR = inc/
 
 # make TMEM=1 will compile with fsanitize flag
 ifeq ($(TMEM), 1)
@@ -18,40 +24,35 @@ ifeq ($(DEBUG), 1)
 CFLAGS += -g
 endif
 
-SRC =	srcs/main.c \
-		srcs/utils/get_next_line.c srcs/utils/get_next_line_utils.c \
-		srcs/utils/ft_printf.c srcs/utils/ft_itoa.c srcs/utils/ft_putchar.c srcs/utils/ft_puthex.c srcs/utils/ft_putstr.c \
-		srcs/parse_map.c \
-		srcs/parse_utils.c \
-		srcs/init_map.c \
-		srcs/moves.c \
-		srcs/win_events.c  \
-		srcs/so_long_utils.c
+SRCS =	main.c \
+		utils/get_next_line.c utils/get_next_line_utils.c \
+		utils/ft_printf.c utils/ft_itoa.c utils/ft_putchar.c utils/ft_puthex.c utils/ft_putstr.c \
+		parse_map.c parse_utils.c init_map.c \
+		moves.c win_events.c so_long_utils.c
 
-OBJDIR = objs
-
-INCDIR = inc
-
-OBJ = $(addprefix ${OBJDIR}/,${SRC:.c=.o})
+SRC = $(addprefix $(SRCDIR), $(SRCS))
+OBJ = $(addprefix ${OBJDIR}, ${SRCS:.c=.o})
 
 INC = -I./${INCDIR} -I./minilibx-linux
 
-MLX = -L./${INCDIR}/minilibx-linux -lmlx
+MLX = -L./${INCDIR}minilibx-linux -lmlx
 
 MLXLIBX = -lXext -lX11 -lm -lz 
 
 all: $(NAME) 
 
-$(NAME): $(OBJ) minilibx
-	$(CC) $(CFLAGS) $(MEM) $(INC) $(OBJ) $(MLX) $(MLXLIBX) -o $@
-
-${OBJDIR}/%.o : %.c
+$(OBJDIR)%.o : $(SRCDIR)%.c
 	mkdir -p ${@D}
 	$(CC) $(CFLAGS) $(MEM) $(INC) -c $< -o $@
 
-minilibx:
+$(NAME): $(OBJ) $(MINILIBX)
+	@echo -n "Compiling so_long"
+	@$(CC) $(CFLAGS) $(MEM) $(INC) $(OBJ) $(MINILIBX) $(MLXLIBX) -o $@
+	@echo ${GREEN}"\tOK"${RESET}
+
+$(MINILIBX):
 	@echo -n "Compiling minilibx"
-	@make -s -C${INCDIR}/minilibx-linux > /dev/null 2>&1
+	@make -s -C${INCDIR}minilibx-linux > /dev/null 2>&1
 	@echo ${GREEN}"\tOK"${RESET}
 
 clean :
@@ -62,5 +63,6 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
+	make all
 
 .PHONY: all clean fclean re bonus minilibx ft_printf

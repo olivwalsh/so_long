@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 12:56:02 by owalsh            #+#    #+#             */
-/*   Updated: 2022/07/13 17:37:36 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/07/14 15:12:22 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,41 @@ typedef struct s_game {
 /*
 *** FILE parse.c
 */
-
+int		parse_map(char *argv, t_game *game);
+int		is_file(char *s);
+int		is_rectangle(t_game *game);
+int		is_framed(t_game *game);
+/*
+*** FILE init.c
+*/
+void	init_map(t_game *game);
+int		fill_line(char *line, char **tab, int j);
+int		fill_tab(char *map_path, t_game *game);
+/*
+*** FILE display.c
+*/
+char	*player_direction(char dir);
+void	display_square(t_game *game, char c, int x, int y);
+int		move(t_game *game, int x, int y);
+int		map_fits_screen(t_game *game);
+/*
+*** FILE moves.c
+*/
+int		key_hook(int keycode, t_game *game);
+/*
+*** FILE utils.c
+*/
+int		is_valid(char c);
+int		in_map(t_game *game, char c);
+void	*ft_memset(void *s, int c, size_t n);
+int		get_map_length(char *map_path);
+int		ft_strncmp(char *s1, char *s2, int n);
+/*
+*** FILE exit.c
+*/
+int		parsing_error(char *line, t_game *game);
+int		sl_close(t_game *game);
+void	free_tab(t_game *game);
+int		exit_game(t_game *game);
 
 #endif

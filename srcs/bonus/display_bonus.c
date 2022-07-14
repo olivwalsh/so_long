@@ -6,11 +6,27 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 17:28:01 by owalsh            #+#    #+#             */
-/*   Updated: 2022/07/14 17:49:58 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/07/14 18:17:07 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+int		is_walkable(char c)
+{
+	char *valid;
+	int	i;
+
+	i = 0;
+	valid = "0CX";
+	while (valid[i])
+	{
+		if (c == valid[i])
+			return (1);
+		i++;	
+	}
+	return (0);	
+}
 
 char	*player_direction(char dir)
 {
@@ -61,6 +77,8 @@ int	move(t_game *game, int x, int y)
 		y--;
 	else if (game->dir == 'D')
 		y++;
+	if (game->tab[y][x] == 'X')
+		return (sl_close(game));
 	game->tab[y][x] = 'P';
 	display_square(game, game->tab[y][x], x, y);
 	game->moves++;

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   moves.c                                            :+:      :+:    :+:   */
+/*   moves_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 19:00:07 by olivia            #+#    #+#             */
-/*   Updated: 2022/07/12 14:18:19 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/07/14 18:14:47 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	move_right(t_game *game)
 		{
 			if (game->tab[y][x] == 'P')
 			{
-				if (game->tab[y][x + 1] == '0' || game->tab[y][x + 1] == 'C')
+				if (is_walkable(game->tab[y][x + 1]))
 					return (move(game, x, y));
 				else if (game->tab[y][x + 1] == 'E' && !in_map(game, 'C'))
 				{
@@ -55,7 +55,7 @@ int	move_left(t_game *game)
 		{
 			if (game->tab[y][x] == 'P')
 			{
-				if (game->tab[y][x - 1] == '0' || game->tab[y][x - 1] == 'C')
+				if (is_walkable(game->tab[y][x - 1]))
 					return (move(game, x, y));
 				else if (game->tab[y][x - 1] == 'E' && !in_map(game, 'C'))
 				{
@@ -84,7 +84,7 @@ int	move_up(t_game *game)
 		{
 			if (game->tab[y][x] == 'P')
 			{
-				if (game->tab[y - 1][x] == '0' || game->tab[y - 1][x] == 'C')
+				if (is_walkable(game->tab[y - 1][x]))
 					return (move(game, x, y));
 				else if (game->tab[y - 1][x] == 'E' && !in_map(game, 'C'))
 				{
@@ -113,7 +113,7 @@ int	move_down(t_game *game)
 		{
 			if (game->tab[y][x] == 'P')
 			{
-				if (game->tab[y + 1][x] == '0' || game->tab[y + 1][x] == 'C')
+				if (is_walkable(game->tab[y + 1][x]))
 					return (move(game, x, y));
 				else if (game->tab[y + 1][x] == 'E' && !in_map(game, 'C'))
 				{

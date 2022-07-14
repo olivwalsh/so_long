@@ -17,10 +17,7 @@ BONUS_DIR	= $(SRCDIR)bonus/
 SRCS		= utils/get_next_line.c utils/get_next_line_utils.c \
 			  utils/ft_printf.c utils/ft_itoa.c utils/ft_putchar.c utils/ft_puthex.c utils/ft_putstr.c \
 			  main.c parse.c init.c display.c moves.c utils.c exit.c
-
-BONUS_SRCS 	= utils/get_next_line_bonus.c utils/get_next_line_utils_bonus.c \
-			  utils/ft_printf_bonus.c utils/ft_itoa_bonus.c utils/ft_putchar_bonus.c utils/ft_puthex_bonus.c utils/ft_putstr_bonus.c \
-			  main_bonus.c parse_bonus.c init_bonus.c display_bonus.c moves_bonus.c utils_bonus.c exit_bonus.c
+BONUS_SRCS 	= $(SRCS:.c=_bonus.c)
 
 OBJ 		= $(addprefix ${OBJDIR}, ${SRCS:.c=.o})
 BONUS_OBJ 	= $(addprefix ${OBJDIR}, ${BONUS_SRCS:.c=.o})
@@ -41,20 +38,20 @@ $(OBJDIR)%.o : $(BONUS_DIR)%.c
 	mkdir -p ${@D}
 	$(CC) $(CFLAGS) $(MEM) $(INC) -c $< -o $@
 
-$(NAME): $(OBJ) $(MINILIBX)
+$(NAME) : $(OBJ) $(MINILIBX)
 	@echo -n "Compiling so_long"
 	@$(CC) $(CFLAGS) $(MEM) $(INC) $(OBJ) $(MINILIBX) $(MLXLIBX) -o $@
-	@echo ${GREEN}"\tOK"${RESET}
+	@echo ${GREEN}"\t\tOK"${RESET}
 
 ${BONUS} : $(BONUS_OBJ) $(MINILIBX)
 	@echo -n "Compiling so_long -- BONUS"
 	@$(CC) $(CFLAGS) $(MEM) $(INC) $(BONUS_OBJ) $(MINILIBX) $(MLXLIBX) -o $@
 	@echo ${GREEN}"\tOK"${RESET}
 
-$(MINILIBX):
+$(MINILIBX) :
 	@echo -n "Compiling minilibx"
 	@make -s -C${INCDIR}minilibx-linux > /dev/null 2>&1
-	@echo ${GREEN}"\tOK"${RESET}
+	@echo ${GREEN}"\t\tOK"${RESET}
 
 clean :
 	rm -rf $(OBJDIR)

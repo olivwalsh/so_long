@@ -2,50 +2,53 @@ RED = "\033[1;31m"
 GREEN = "\033[1;32m"
 RESET = "\033[m"
 
-NAME = so_long
+NAME 		= so_long
+BONUS 		= so_long_bonus
+MINILIBX 	= $(INCDIR)minilibx-linux/libmlx_Linux.a
 
-CC = cc
+CC 			= cc
+CFLAGS		= -Wall -Wextra -Werror
 
-MINILIBX = $(INCDIR)minilibx-linux/libmlx_Linux.a
+OBJDIR 		= objs/
+SRCDIR		= srcs/
+INCDIR		= inc/
+BONUS_DIR	= $(SRCDIR)bonus/
 
-CFLAGS = -Wall -Wextra -Werror
+SRCS		= utils/get_next_line.c utils/get_next_line_utils.c \
+			  utils/ft_printf.c utils/ft_itoa.c utils/ft_putchar.c utils/ft_puthex.c utils/ft_putstr.c \
+			  main.c parse.c init.c display.c moves.c utils.c exit.c
 
-OBJDIR = objs/
-SRCDIR = srcs/
-INCDIR = inc/
+BONUS_SRCS 	= utils/get_next_line_bonus.c utils/get_next_line_utils_bonus.c \
+			  utils/ft_printf_bonus.c utils/ft_itoa_bonus.c utils/ft_putchar_bonus.c utils/ft_puthex_bonus.c utils/ft_putstr_bonus.c \
+			  main_bonus.c parse_bonus.c init_bonus.c display_bonus.c moves_bonus.c utils_bonus.c exit_bonus.c
 
-# make TMEM=1 will compile with fsanitize flag
-ifeq ($(TMEM), 1)
-MEM = -fsanitize=address
-endif
+OBJ 		= $(addprefix ${OBJDIR}, ${SRCS:.c=.o})
+BONUS_OBJ 	= $(addprefix ${OBJDIR}, ${BONUS_SRCS:.c=.o})
 
-# make DEBUG will add -g flag
-ifeq ($(DEBUG), 1)
-CFLAGS += -g
-endif
-
-SRCS =	utils/get_next_line.c utils/get_next_line_utils.c \
-		utils/ft_printf.c utils/ft_itoa.c utils/ft_putchar.c utils/ft_puthex.c utils/ft_putstr.c \
-		main.c parse.c init.c display.c moves.c utils.c exit.c
-
-SRC = $(addprefix $(SRCDIR), $(SRCS))
-OBJ = $(addprefix ${OBJDIR}, ${SRCS:.c=.o})
-
-INC = -I./${INCDIR} -I./minilibx-linux
-
-MLX = -L./${INCDIR}minilibx-linux -lmlx
-
-MLXLIBX = -lXext -lX11 -lm -lz 
+INC 		= -I./${INCDIR} -I./minilibx-linux
+MLX 		= -L./${INCDIR}minilibx-linux -lmlx
+MLXLIBX 	= -lXext -lX11 -lm -lz 
 
 all: $(NAME) 
 
+bonus: ${BONUS}
+
 $(OBJDIR)%.o : $(SRCDIR)%.c
+	mkdir -p ${@D}
+	$(CC) $(CFLAGS) $(MEM) $(INC) -c $< -o $@
+
+$(OBJDIR)%.o : $(BONUS_DIR)%.c
 	mkdir -p ${@D}
 	$(CC) $(CFLAGS) $(MEM) $(INC) -c $< -o $@
 
 $(NAME): $(OBJ) $(MINILIBX)
 	@echo -n "Compiling so_long"
 	@$(CC) $(CFLAGS) $(MEM) $(INC) $(OBJ) $(MINILIBX) $(MLXLIBX) -o $@
+	@echo ${GREEN}"\tOK"${RESET}
+
+${BONUS} : $(BONUS_OBJ) $(MINILIBX)
+	@echo -n "Compiling so_long -- BONUS"
+	@$(CC) $(CFLAGS) $(MEM) $(INC) $(BONUS_OBJ) $(MINILIBX) $(MLXLIBX) -o $@
 	@echo ${GREEN}"\tOK"${RESET}
 
 $(MINILIBX):
@@ -58,9 +61,9 @@ clean :
 	@make clean -s -C${INCDIR}/minilibx-linux
 
 fclean: clean
-	rm -f $(NAME)
+	rm -f $(NAME) $(BONUS)
 
 re: fclean all
 	make all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re bonus

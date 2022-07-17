@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   init_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 20:53:41 by owalsh            #+#    #+#             */
-/*   Updated: 2022/07/13 17:35:17 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/07/14 18:47:40 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,13 @@ void	init_map(t_game *game)
 		}
 		y++;
 	}
+	x = 0;
+	while (x < game->width)
+	{
+		display_square(game, '0', x, y);
+		x++;
+	}
+	mlx_string_put(game->mlx, game->mlx_win, (game->width / 2) * 105, (game->length) * 110, 0x000000FF, "MOVES = 0");
 }
 
 int	fill_line(char *line, char **tab, int j)

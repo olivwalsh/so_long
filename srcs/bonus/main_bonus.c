@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 12:56:06 by owalsh            #+#    #+#             */
-/*   Updated: 2022/07/13 17:22:56 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/07/14 18:57:07 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ int	loop_function(t_game *g)
 	if (!map_fits_screen(g))
 	{
 		error();
-		ft_printf("Map does not fit screen size.\n");
+		write(2, "Map does not fit screen size.\n", 30);
 		sl_close(g);
 	}
-	g->mlx_win = mlx_new_window(g->mlx, g->width * 100, g->length * 100, \
+	g->mlx_win = mlx_new_window(g->mlx, g->width * 100, (g->length + 1) * 100, \
 		"So Long");
 	g->moves = 0;
 	init_map(g);

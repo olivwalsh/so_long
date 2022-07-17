@@ -14,8 +14,7 @@ SRCDIR		= srcs/
 INCDIR		= inc/
 BONUS_DIR	= $(SRCDIR)bonus/
 
-SRCS		= utils/get_next_line.c utils/get_next_line_utils.c \
-			  utils/ft_printf.c utils/ft_itoa.c utils/ft_putchar.c utils/ft_puthex.c utils/ft_putstr.c \
+SRCS		= utils/get_next_line.c utils/get_next_line_utils.c utils/ft_itoa.c \
 			  main.c parse.c init.c display.c moves.c utils.c exit.c
 BONUS_SRCS 	= $(SRCS:.c=_bonus.c)
 

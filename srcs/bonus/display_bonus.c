@@ -6,16 +6,16 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 17:28:01 by owalsh            #+#    #+#             */
-/*   Updated: 2022/07/14 18:17:07 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/07/14 19:09:23 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int		is_walkable(char c)
+int	is_walkable(char c)
 {
-	char *valid;
-	int	i;
+	char	*valid;
+	int		i;
 
 	i = 0;
 	valid = "0CX";
@@ -23,9 +23,9 @@ int		is_walkable(char c)
 	{
 		if (c == valid[i])
 			return (1);
-		i++;	
+		i++;
 	}
-	return (0);	
+	return (0);
 }
 
 char	*player_direction(char dir)
@@ -67,6 +67,9 @@ void	display_square(t_game *game, char c, int x, int y)
 
 int	move(t_game *game, int x, int y)
 {
+	char	*str;
+	
+	str = NULL;
 	game->tab[y][x] = '0';
 	display_square(game, game->tab[y][x], x, y);
 	if (game->dir == 'R')
@@ -82,7 +85,8 @@ int	move(t_game *game, int x, int y)
 	game->tab[y][x] = 'P';
 	display_square(game, game->tab[y][x], x, y);
 	game->moves++;
-	ft_printf("%d\n", game->moves);
+	str = ft_itoa(game->moves);
+	mlx_string_put(game->mlx, game->mlx_win, (game->width / 2) * 115, (game->length) * 110, 0x000000FF, str);
 	return (1);
 }
 

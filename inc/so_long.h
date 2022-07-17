@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 12:56:02 by owalsh            #+#    #+#             */
-/*   Updated: 2022/07/14 18:12:21 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/07/14 18:55:54 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ typedef struct s_game {
 
 # include <stdio.h>
 # include "minilibx-linux/mlx.h"
-# include "ft_printf/ft_printf.h"
 # include "get_next_line/get_next_line.h"
 # include <stdlib.h>
 # include <sys/stat.h>
@@ -87,5 +86,7 @@ int		parsing_error(char *line, t_game *game);
 int		sl_close(t_game *game);
 void	free_tab(t_game *game);
 int		exit_game(t_game *game);
+// FILE utils/ft_itoa.c
+char	*ft_itoa(int n);
 
 #endif

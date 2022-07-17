@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 17:28:01 by owalsh            #+#    #+#             */
-/*   Updated: 2022/07/13 17:33:50 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/07/14 19:07:02 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,9 @@ void	display_square(t_game *game, char c, int x, int y)
 
 int	move(t_game *game, int x, int y)
 {
+	char	*count;
+
+	count = NULL;
 	game->tab[y][x] = '0';
 	display_square(game, game->tab[y][x], x, y);
 	if (game->dir == 'R')
@@ -62,7 +65,10 @@ int	move(t_game *game, int x, int y)
 	game->tab[y][x] = 'P';
 	display_square(game, game->tab[y][x], x, y);
 	game->moves++;
-	ft_printf("%d\n", game->moves);
+	count = ft_itoa(game->moves);
+	write(1, count, ft_strlen(count));
+	write(1, "\n", 1);
+	free(count);
 	return (1);
 }
 

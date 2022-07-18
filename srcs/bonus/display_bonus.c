@@ -6,22 +6,38 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 17:28:01 by owalsh            #+#    #+#             */
-/*   Updated: 2022/07/18 10:19:10 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/07/18 11:39:11 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-char	*player_direction(char dir)
+char	*player_direction(t_game *game)
 {
-	if (dir == 'U')
+	if (game->dir == 'U')
+	{
+		if (game->eating)
+			return ("./imgs/player/eating/up.xpm");
 		return ("./imgs/player/up.xpm");
-	else if (dir == 'D')
+	}
+	else if (game->dir == 'D')
+	{
+		if (game->eating)
+			return ("./imgs/player/eating/down.xpm");
 		return ("./imgs/player/down.xpm");
-	else if (dir == 'L')
+	}
+	else if (game->dir == 'L')
+	{
+		if (game->eating)
+			return ("./imgs/player/eating/left.xpm");
 		return ("./imgs/player/left.xpm");
+	}
 	else
+	{
+		if (game->eating)
+			return ("./imgs/player/eating/right.xpm");
 		return ("./imgs/player/right.xpm");
+	}
 }
 
 void	display_square(t_game *game, char c, int x, int y)
@@ -37,7 +53,10 @@ void	display_square(t_game *game, char c, int x, int y)
 	else if (c == '1')
 		path = "./imgs/wall.xpm";
 	else if (c == 'P')
-		path = player_direction(game->dir);
+	{
+		path = player_direction(game);
+		game->eating = 0;
+	}
 	else if (c == 'C')
 		path = "./imgs/collectible.xpm";
 	else if (c == 'E')
@@ -76,6 +95,8 @@ int	move(t_game *game, int x, int y)
 		y++;
 	if (game->tab[y][x] == 'X')
 		return (sl_close(game));
+	if (game->tab[y][x] == 'C')
+		game->eating = 1;
 	game->tab[y][x] = 'P';
 	display_square(game, game->tab[y][x], x, y);
 	game->moves++;

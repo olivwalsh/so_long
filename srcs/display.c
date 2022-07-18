@@ -6,14 +6,17 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 17:28:01 by owalsh            #+#    #+#             */
-/*   Updated: 2022/07/14 19:07:02 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/07/18 10:46:11 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-char	*player_direction(char dir)
+char	*player_direction(t_game *game)
 {
+	char	dir;
+
+	dir = game->dir;
 	if (dir == 'U')
 		return ("./imgs/player/up.xpm");
 	else if (dir == 'D')
@@ -37,7 +40,7 @@ void	display_square(t_game *game, char c, int x, int y)
 	else if (c == '1')
 		path = "./imgs/wall.xpm";
 	else if (c == 'P')
-		path = player_direction(game->dir);
+		path = player_direction(game);
 	else if (c == 'C')
 		path = "./imgs/collectible.xpm";
 	else if (c == 'E')

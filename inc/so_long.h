@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 12:56:02 by owalsh            #+#    #+#             */
-/*   Updated: 2022/07/18 10:20:45 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/07/18 10:37:36 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_game {
 	int		moves;
 	int		collectibles;
 	char	dir;
+	int		eating;
 }				t_game;
 
 # include <stdio.h>
@@ -63,7 +64,7 @@ int		fill_tab(char *map_path, t_game *game);
 /*
 *** FILE display.c
 */
-char	*player_direction(char dir);
+char	*player_direction(t_game *game);
 void	display_square(t_game *game, char c, int x, int y);
 int		move(t_game *game, int x, int y);
 int		map_fits_screen(t_game *game);

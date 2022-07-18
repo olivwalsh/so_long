@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 12:56:02 by owalsh            #+#    #+#             */
-/*   Updated: 2022/07/14 18:55:54 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/07/18 10:20:45 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int		is_framed(t_game *game);
 *** FILE init.c
 */
 void	init_map(t_game *game);
+int		is_walkable(char c);
 int		fill_line(char *line, char **tab, int j);
 int		fill_tab(char *map_path, t_game *game);
 /*
@@ -66,7 +67,6 @@ char	*player_direction(char dir);
 void	display_square(t_game *game, char c, int x, int y);
 int		move(t_game *game, int x, int y);
 int		map_fits_screen(t_game *game);
-int		is_walkable(char c);
 /*
 *** FILE moves.c
 */

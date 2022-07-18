@@ -6,27 +6,11 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 17:28:01 by owalsh            #+#    #+#             */
-/*   Updated: 2022/07/14 19:09:23 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/07/18 10:19:10 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-int	is_walkable(char c)
-{
-	char	*valid;
-	int		i;
-
-	i = 0;
-	valid = "0CX";
-	while (valid[i])
-	{
-		if (c == valid[i])
-			return (1);
-		i++;
-	}
-	return (0);
-}
 
 char	*player_direction(char dir)
 {
@@ -65,11 +49,21 @@ void	display_square(t_game *game, char c, int x, int y)
 	mlx_destroy_image(game->mlx, img);
 }
 
-int	move(t_game *game, int x, int y)
+void	display_movescount(t_game *game)
 {
 	char	*str;
-	
-	str = NULL;
+
+	str = ft_itoa(game->moves);
+	display_square(game, '0', game->width / 2, game->length);
+	mlx_string_put(game->mlx, game->mlx_win, \
+		(game->width / 2) * 105, (game->length) * 110, 0x000000FF, "MOVES =");
+	mlx_string_put(game->mlx, game->mlx_win, \
+		(game->width / 2) * 113, (game->length) * 110, 0x000000FF, str);
+	free(str);
+}
+
+int	move(t_game *game, int x, int y)
+{
 	game->tab[y][x] = '0';
 	display_square(game, game->tab[y][x], x, y);
 	if (game->dir == 'R')
@@ -85,8 +79,7 @@ int	move(t_game *game, int x, int y)
 	game->tab[y][x] = 'P';
 	display_square(game, game->tab[y][x], x, y);
 	game->moves++;
-	str = ft_itoa(game->moves);
-	mlx_string_put(game->mlx, game->mlx_win, (game->width / 2) * 115, (game->length) * 110, 0x000000FF, str);
+	display_movescount(game);
 	return (1);
 }
 

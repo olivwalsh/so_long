@@ -6,11 +6,27 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 20:53:41 by owalsh            #+#    #+#             */
-/*   Updated: 2022/07/14 18:47:40 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/07/18 10:19:46 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+int	is_walkable(char c)
+{
+	char	*valid;
+	int		i;
+
+	i = 0;
+	valid = "0CX";
+	while (valid[i])
+	{
+		if (c == valid[i])
+			return (1);
+		i++;
+	}
+	return (0);
+}
 
 void	init_map(t_game *game)
 {
@@ -37,7 +53,8 @@ void	init_map(t_game *game)
 		display_square(game, '0', x, y);
 		x++;
 	}
-	mlx_string_put(game->mlx, game->mlx_win, (game->width / 2) * 105, (game->length) * 110, 0x000000FF, "MOVES = 0");
+	mlx_string_put(game->mlx, game->mlx_win, (game->width / 2) * 105, \
+		(game->length) * 110, 0x000000FF, "MOVES = 0");
 }
 
 int	fill_line(char *line, char **tab, int j)

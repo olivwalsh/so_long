@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 19:02:15 by olivia            #+#    #+#             */
-/*   Updated: 2022/07/18 13:07:55 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/07/18 13:11:49 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ void	free_tab(t_game *game, int index)
 		free(game->tab);
 	}
 }
-
 
 int	exit_game(t_game *game)
 {

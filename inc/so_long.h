@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 12:56:02 by owalsh            #+#    #+#             */
-/*   Updated: 2022/07/18 10:37:36 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/07/18 12:55:42 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct	s_data {
 }				t_data;
 
 typedef struct s_game {
+	char	*map_path;
 	void 	*mlx;
 	void	*mlx_win;
 	char	**tab;
@@ -50,7 +51,7 @@ typedef struct s_game {
 /*
 *** FILE parse.c
 */
-int		parse_map(char *argv, t_game *game);
+int		parse_map(t_game *game);
 int		is_file(char *s);
 int		is_rectangle(t_game *game);
 int		is_framed(t_game *game);
@@ -60,7 +61,7 @@ int		is_framed(t_game *game);
 void	init_map(t_game *game);
 int		is_walkable(char c);
 int		fill_line(char *line, char **tab, int j);
-int		fill_tab(char *map_path, t_game *game);
+int		fill_tab(t_game *game);
 /*
 *** FILE display.c
 */
@@ -83,9 +84,9 @@ int		ft_strncmp(char *s1, char *s2, int n);
 /*
 *** FILE exit.c
 */
-int		parsing_error(char *line, t_game *game);
+int		parsing_error(char *line, t_game *game, int index);
 int		sl_close(t_game *game);
-void	free_tab(t_game *game);
+void	free_tab(t_game *game, int index);
 int		exit_game(t_game *game);
 // FILE utils/ft_itoa.c
 char	*ft_itoa(int n);

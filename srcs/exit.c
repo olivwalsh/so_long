@@ -6,15 +6,15 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 19:02:15 by olivia            #+#    #+#             */
-/*   Updated: 2022/07/13 17:29:36 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/07/18 12:06:48 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	parsing_error(char *line, t_game *game)
+int	parsing_error(char *line, t_game *game, int index)
 {
-	free_tab(game);
+	free_tab(game, index);
 	free(line);
 	return (0);
 }
@@ -24,7 +24,7 @@ int	sl_close(t_game *game)
 	mlx_loop_end(game->mlx);
 	if (game)
 	{
-		free_tab(game);
+		free_tab(game, game->length);
 		if (game->mlx_win)
 			mlx_destroy_window(game->mlx, game->mlx_win);
 		if (game->mlx)
@@ -36,7 +36,7 @@ int	sl_close(t_game *game)
 	exit(0);
 }
 
-void	free_tab(t_game *game)
+void	free_tab(t_game *game, int index)
 {
 	int	y;
 
@@ -45,7 +45,7 @@ void	free_tab(t_game *game)
 	{
 		if (game->tab[y])
 		{
-			while (y < game->length)
+			while (y <= index)
 			{
 				free(game->tab[y]);
 				y++;

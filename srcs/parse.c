@@ -6,20 +6,23 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 13:57:15 by olivia            #+#    #+#             */
-/*   Updated: 2022/07/13 17:35:21 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/07/18 12:55:29 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	parse_map(char *argv, t_game *game)
+int	parse_map(t_game *game)
 {
-	if (!is_file(argv))
+	if (!is_file(game->map_path))
 		return (0);
-	if (!fill_tab(argv, game) || !is_rectangle(game) || !is_framed(game))
+	if (!fill_tab(game) || !is_rectangle(game) || !is_framed(game))
 		return (0);
 	if (in_map(game, 'P') != 1 || in_map(game, 'E') != 1 || !in_map(game, 'C'))
+	{
+		free_tab(game, game->length);
 		return (0);
+	}
 	return (1);
 }
 
@@ -52,7 +55,10 @@ int	is_rectangle(t_game *game)
 		if (y == 0)
 			prev_x = x;
 		if (y != 0 && prev_x != x)
+		{
+			free_tab(game, get_map_length(game->map_path));
 			return (0);
+		}
 		y++;
 	}
 	game->length = y;
@@ -73,10 +79,12 @@ int	is_framed(t_game *game)
 		{
 			if (game->tab[y][x] != '1')
 			{
-				if (y == 0 || y == game->length - 1)
+				if (y == 0 || y == game->length - 1 \
+					|| x == 0 || x == game->width - 1)
+				{
+					free_tab(game, game->length);
 					return (0);
-				if (x == 0 || x == game->width - 1)
-					return (0);
+				}
 			}
 			x++;
 		}

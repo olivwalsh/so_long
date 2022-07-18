@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 20:53:41 by owalsh            #+#    #+#             */
-/*   Updated: 2022/07/18 11:38:04 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/07/18 13:04:14 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	fill_line(char *line, char **tab, int j)
 	return (1);
 }
 
-int	fill_tab(char *map_path, t_game *game)
+int	fill_tab(t_game *game)
 {
 	char	*line;
 	int		fd;
@@ -81,10 +81,10 @@ int	fill_tab(char *map_path, t_game *game)
 	int		y;
 
 	y = 0;
-	game->tab = malloc(sizeof(char *) * (get_map_length(map_path) + 1));
+	game->tab = malloc(sizeof(char *) * (get_map_length(game->map_path) + 1));
 	if (!game->tab)
 		return (0);
-	fd = open(map_path, O_RDONLY);
+	fd = open(game->map_path, O_RDONLY);
 	line = get_next_line(fd);
 	while (line)
 	{
@@ -93,7 +93,7 @@ int	fill_tab(char *map_path, t_game *game)
 			j++;
 		game->tab[y] = malloc(sizeof(char) * (j + 1));
 		if (!game->tab[y] || !fill_line(line, &game->tab[y], j))
-			return (parsing_error(line, game));
+			return (parsing_error(line, game, y));
 		free(line);
 		line = get_next_line(fd);
 		y++;

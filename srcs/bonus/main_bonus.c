@@ -6,7 +6,7 @@
 /*   By: owalsh <owalsh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 12:56:06 by owalsh            #+#    #+#             */
-/*   Updated: 2022/07/14 18:57:07 by owalsh           ###   ########.fr       */
+/*   Updated: 2022/07/18 13:02:37 by owalsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ int	main(int argc, char **argv)
 		return (0);
 	else if (argc > 2)
 		return (error());
-	if (parse_map(argv[1], &game))
+	game.map_path = argv[1];
+	if (parse_map(&game))
 		loop_function(&game);
 	else
 		return (error());
